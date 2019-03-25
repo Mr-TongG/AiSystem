@@ -1,4 +1,4 @@
-package com.MyProject;
+package com;
 
 //规则库
 public class Rule {

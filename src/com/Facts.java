@@ -1,4 +1,4 @@
-package com.MyProject;
+package com;
 
 //事实实体
 public class Facts {

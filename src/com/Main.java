@@ -1,16 +1,13 @@
-package com.Swing;
-
-import com.MyProject.Facts;
-import com.MyProject.Rule;
+package com;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static com.Swing.panel.Identify;
+import static com.Main.Identify;
 
-public class panel {
+public class Main {
     static String Features[]={"含二氧化碳","含果汁","含蔬菜汁","含茶叶浓缩液","有保健作用",
             "能补充维生素","能补充电解质","能产生大量气泡","碳酸类饮料","有甜味","颜色为褐色",
             "果蔬类饮料","茶饮料类","功能饮料类","运动饮料类","颜色为无色","主要原料是苹果",
@@ -19,60 +16,64 @@ public class panel {
     static String Results[]={"可乐","苏打水","苹果醋","番茄汁","脉动","养乐多","绿茶"};
     //建立事实库
     static Facts factsDB = new Facts();
+    static int factNum=0;
     //建立规则库并初始化
     static Rule rules[]= Rule.InitRules();
-    static int factNum=0;
 
+    //显示框和复选按钮是全局的
     static JTextField f1=new JTextField();
     static JRadioButton[] feather=new JRadioButton[23];
+
     public static void main(String[] args){
         JFrame f=new JFrame("正向产生式系统");
         f.setPreferredSize(new Dimension(1500,800));
-        f.setLocation(100,150);
+        f.setLocation(100,100);
         f.setLayout(null);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);
 
-        JPanel panel=new JPanel();
-        panel.setAutoscrolls(true);
-        panel.setBounds(100,100,1200,800);
-        panel.setLayout(new FlowLayout());
-        panel.setFont(new Font("微软雅黑",Font.PLAIN,18));
+        Font font=new Font("微软雅黑",Font.PLAIN,20);
 
+        JPanel panel=new JPanel();
+        panel.setBounds(100,100,1200,300);
+        panel.setLayout(new FlowLayout());
+        panel.setFont(font);
         JLabel label1=new JLabel("特征集如下：");
         label1.setBounds(10,10,100,30);
-        label1.setFont(new Font("微软雅黑",Font.PLAIN,18));
-
+        label1.setFont(font);
+        panel.add(label1);
+        //两个面板
+        JPanel panel2=new JPanel();
+        panel2.setBounds(100,400,1200,300);
+        panel2.setLayout(null);
+        panel2.setFont(font);
         JLabel label2=new JLabel("结果为：");
-        label2.setBounds(100,600,100,30);
-        label2.setFont(new Font("微软雅黑",Font.PLAIN,18));
+        label2.setBounds(600,10,100,30);
+        label2.setFont(font);
+        panel2.add(label2);
 
         for(int i=0;i<Features.length;i++) {
-            //JRadioButton[] feather=new JRadioButton[23];
             feather[i]=new JRadioButton(Features[i]);
             feather[i].setSelected(false);
             feather[i].setBounds(50, 50+50*i, 180, 50);
-            feather[i].setFont(new Font("微软雅黑",Font.PLAIN,18));
+            feather[i].setFont(font);
             panel.add(feather[i]);
         }
 
         JButton button=new JButton("开始");
         Listen l=new Listen();
         button.addActionListener(l);
-        button.setBounds(100,500,200,50);
+        button.setBounds(380,0,100,50);
+        button.setFont(font);
+
         //显示结果的文本框
-        f1.setBounds(100,600,200,50);
+        f1.setBounds(700,0,200,50);
 
-        //int option=JOptionPane.showConfirmDialog(f,"还要再进行匹配吗？");
-        panel.add(label1);
-        f.add(button);
-        f.add(label2);
-        f.add(f1);
+        panel2.add(button);
+        panel2.add(f1);
         f.add(panel);
+        f.add(panel2);
         f.pack();
-
-
-
     }
 
     public static int compare(Rule r,Facts f){
