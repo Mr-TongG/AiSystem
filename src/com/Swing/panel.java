@@ -59,7 +59,7 @@ public class panel {
         JButton button=new JButton("开始");
         Listen l=new Listen();
         button.addActionListener(l);
-        button.setBounds(100,400,200,50);
+        button.setBounds(100,500,200,50);
         //显示结果的文本框
         f1.setBounds(100,600,200,50);
 
