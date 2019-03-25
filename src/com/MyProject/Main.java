@@ -114,6 +114,7 @@ public class Main {
         }
         if(!findAns){
             System.out.println("无匹配答案");
+            System.out.println();
         }
     }
 }
