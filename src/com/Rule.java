@@ -110,31 +110,31 @@ public class Rule {
     //非结果库
         //碳酸类饮料（含二氧化碳）
         int fact7[]={1};
-        rules[7]=new Rule(1,fact7,false,10);
+        rules[7]=new Rule(1,fact7,false,9);
 
         //碳酸类饮料（能产生大量气泡）
         int fact8[]={8};
-        rules[8]=new Rule(1,fact8,false,10);
+        rules[8]=new Rule(1,fact8,false,9);
 
         //果蔬类饮料（含果汁）
         int fact9[]={2};
-        rules[9]=new Rule(1,fact9,false,10);
+        rules[9]=new Rule(1,fact9,false,12);
 
         //含蔬菜汁（含蔬菜汁）
         int fact10[]={3};
-        rules[10]=new Rule(1,fact10,false,10);
+        rules[10]=new Rule(1,fact10,false,12);
 
         //茶饮料（含茶叶浓缩液）
         int fact11[]={4};
-        rules[11]=new Rule(1,fact11,false,10);
+        rules[11]=new Rule(1,fact11,false,13);
 
         //功能饮料（有保健作用）
         int fact12[]={5};
-        rules[12]=new Rule(1,fact12,false,10);
+        rules[12]=new Rule(1,fact12,false,14);
 
         //运动饮料类（补充维生素，补充电解质）
         int fact13[]={6,7};
-        rules[13]=new Rule(2,fact13,false,10);
+        rules[13]=new Rule(2,fact13,false,15);
 
         return rules;
     }

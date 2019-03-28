@@ -13,7 +13,7 @@ public class Main {
             "果蔬类饮料","茶饮料类","功能饮料类","运动饮料类","颜色为无色","主要原料是苹果",
             "主要原料是番茄","味道微酸","颜色为红色","含益生菌","味道微甜","颜色为绿色"};
     //建立结果库
-    static String Results[]={"可乐","苏打水","苹果醋","番茄汁","脉动","养乐多","绿茶"};
+    static String Results[]={"可乐","苏打水","苹果醋","番茄汁","养乐多","脉动","绿茶"};
     //建立事实库
     static Facts factsDB = new Facts();
     static int factNum=0;
@@ -24,6 +24,8 @@ public class Main {
     static JTextField f1=new JTextField();
     static JRadioButton[] feather=new JRadioButton[23];
 
+    static int[] fact1 = new int[25];
+    static int[] fact2 = new int[25];
     public static void main(String[] args){
         JFrame f=new JFrame("正向产生式系统");
         f.setPreferredSize(new Dimension(1500,800));
@@ -52,7 +54,7 @@ public class Main {
         label2.setFont(font);
         panel2.add(label2);
 
-        for(int i=0;i<Features.length;i++) {
+        for(int i=0;i<Features.length;i++) {//对可选项进行初始化
             feather[i]=new JRadioButton(Features[i]);
             feather[i].setSelected(false);
             feather[i].setBounds(50, 50+50*i, 180, 50);
@@ -68,6 +70,7 @@ public class Main {
 
         //显示结果的文本框
         f1.setBounds(700,0,200,50);
+        f1.setFont(font);
 
         panel2.add(button);
         panel2.add(f1);
@@ -81,7 +84,7 @@ public class Main {
         int F_Fact[]= f.getFacts();
         int factNum =f.getFactNum();
 
-        for(int i=r.getNextFactPos();i<r.getFactNum();i++){
+        for(int i=r.getNextFactPos();i<r.getFactNum();i++){//从该规则的第i项开始匹配
             boolean isMatch=false;
             for(int j=0;j<factNum;j++){
                 if(F_Rule[i] == F_Fact[j]){//匹配成功
@@ -114,8 +117,6 @@ public class Main {
     }
 
     public static void Identify(){
-        int[] fact1 = new int[25];
-        int[] fact2 = new int[25];
         for(int i=0;i<feather.length;i++){
             if(feather[i].isSelected())
                 fact1[i]=i+1;
@@ -143,7 +144,7 @@ public class Main {
                 if(res == 0){//不匹配
                     continue;
                 }
-                else if(res == 1){//匹配，但是为中间值
+                else if(res == 1){//匹配，但是为中间值，把根据事实推出的中间结果加入到事实库中
                     int[] facts=factsDB.getFacts();
                     int n = factsDB.getFactNum();
                     facts[n]=rules[i].getResultID();
@@ -154,7 +155,7 @@ public class Main {
                 }
                 else if(res == 2){//匹配，且为最终答案
                     f1.setText(Results[rules[i].getResultID()-1]);
-                    System.out.println("结果是:"+Results[rules[i].getResultID()-1]);
+                    //System.out.println("结果是:"+Results[rules[i].getResultID()-1]);
                     findAns=true;
                     break;
                 }
@@ -164,11 +165,12 @@ public class Main {
             f1.setText("无匹配答案");
         }
     }
-
 }
 class Listen implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
+        Main.fact1 = new int[25];
+        Main.fact2 = new int[25];
         Identify();
     }
 }
